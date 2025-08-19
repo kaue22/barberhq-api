@@ -1,0 +1,5 @@
+CREATE TABLE public.tenants (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    schema_name VARCHAR(255) NOT NULL UNIQUE
+);

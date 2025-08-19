@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: barberhq-postgres
+    environment:
+      POSTGRES_USER: postgres # Usuário do banco
+      POSTGRES_PASSWORD: 1234 # <<< TROQUE PELA SUA SENHA
+      POSTGRES_DB: barberhq_landlord # Nome do banco principal
+    ports:
+      - "5432:5432" # Expõe a porta do Postgres para a sua máquina local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # Serviço do Cache Redis
+  redis:
+    image: redis:7
+    container_name: barberhq-redis
+    ports:
+      - "6379:6379" # Expõe a porta do Redis para a sua máquina local
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
